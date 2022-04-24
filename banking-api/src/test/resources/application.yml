@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /baraka
+flyway:
+  user: sa
+  password: sa
+  schemas: app-db
+  url: jdbc:h2:mem:testdb
+  locations: filesystem:db/migration
