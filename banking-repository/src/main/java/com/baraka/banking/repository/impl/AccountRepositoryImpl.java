@@ -6,6 +6,8 @@ import com.baraka.banking.jpa.AccountJpaRepository;
 import com.baraka.banking.map.AccountMap;
 import com.baraka.banking.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
+    @Cacheable(cacheNames = {"accountCache"}, key = "#accountNumber")
     public Optional<AccountBo> findByAccountNumber(String accountNumber) {
         AccountEntity entity = repository.findByAccountNumber(accountNumber);
         if (isNull(entity))

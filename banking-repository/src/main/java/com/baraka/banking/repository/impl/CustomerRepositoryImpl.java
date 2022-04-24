@@ -6,6 +6,7 @@ import com.baraka.banking.jpa.CustomerJpaRepository;
 import com.baraka.banking.map.CustomerMap;
 import com.baraka.banking.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    @Cacheable(cacheNames = {"customerCache"}, key = "#customerExternalId")
     public Optional<CustomerBo> findByCustomerExternalId(String customerExternalId) {
         CustomerEntity entity = repository.findByCustomerExternalId(customerExternalId);
         if (isNull(entity))
