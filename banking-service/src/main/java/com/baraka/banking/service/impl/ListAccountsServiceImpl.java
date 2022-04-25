@@ -9,6 +9,7 @@ import com.baraka.banking.request.BankingRequest;
 import com.baraka.banking.response.BankingResponse;
 import com.baraka.banking.service.BankingService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class ListAccountsServiceImpl implements BankingService {
         this.accountRepository = accountRepository;
     }
 
+    @Transactional
     @Override
     public BankingResponse<List<ListAccountsDto>> call(BankingRequest request) {
         List<ListAccountsDto> list = new ArrayList<>();

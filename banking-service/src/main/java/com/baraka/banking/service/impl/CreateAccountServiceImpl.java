@@ -13,6 +13,7 @@ import com.baraka.banking.service.BankingService;
 import com.baraka.banking.util.JacksonUtil;
 import com.baraka.banking.util.RandomStringGeneratorUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class CreateAccountServiceImpl implements BankingService {
         this.accountRepository = accountRepository;
     }
 
+    @Transactional
     @Override
     public BankingResponse<CreateAccountDto> call(BankingRequest request) {
         RequestDto requestDto = JacksonUtil.toObject(request.getRequest(), RequestDto.class);

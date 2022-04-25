@@ -16,6 +16,7 @@ import com.baraka.banking.service.BankingService;
 import com.baraka.banking.service.BankingValidationService;
 import com.baraka.banking.util.JacksonUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -38,6 +39,7 @@ public class MoneyLocalTransferServiceImpl implements BankingService {
         this.bankingValidationService = bankingValidationService;
     }
 
+    @Transactional
     @Override
     public BankingResponse<MoneyLocalTransferDto> call(BankingRequest request) {
         RequestDto requestDto = JacksonUtil.toObject(request.getRequest(), RequestDto.class);
